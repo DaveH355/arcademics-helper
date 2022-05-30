@@ -3,7 +3,7 @@ Cheat scripts for games on https://www.arcademics.com/
 ## How to use
 
 
-- `Step 1` open an Arcademics, right-click on the **game window** and choose to inspect the page elements
+- `Step 1` open an Arcademics game, right-click on the **game window** and choose to inspect the page elements
 
 - `Step 2` go to the console in Chrome developer tools and copy-paste the appropriate script for the game. Press enter to run the script
 
