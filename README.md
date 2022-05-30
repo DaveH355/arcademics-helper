@@ -13,6 +13,6 @@ Cheat scripts for games on https://www.arcademics.com/
 ## Supported games
 These are the current games you can cheat on. Links to copy the script also included
 
-- `Tractor Multiplication`  https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/tractor-multiplication.js
+- `Tractor Multiplication` https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/scripts/grand-prix.js
 
-- `Grand Prix Multiplication` https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/grand-prix.js
+- `Grand Prix Multiplication` https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/scripts/tractor-multiplication.js
