@@ -16,8 +16,8 @@ The cheats currently only work in the Google Chrome browser. Also note you'll ha
 ## Supported games
 These are the current games you can cheat on. Links to copy the script also included
 
-- `Tractor Multiplication` https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/scripts/tractor-multiplication.js
+- `Tractor Multiplication` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/tractor-multiplication.js
 
-- `Grand Prix Multiplication` https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/scripts/grand-prix.js
+- `Grand Prix Multiplication` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/grand-prix.js
 
-- `Jet Ski Addition` https://github.com/Jackkillian-Studios/arcademics-cheats/blob/main/scripts/jet-ski-addition.js
+- `Jet Ski Addition` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/jet-ski-addition.js
