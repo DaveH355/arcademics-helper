@@ -1,4 +1,4 @@
-# arcademics-cheats
+# arcademics-cheats (Broken)
 Cheat scripts for games on https://www.arcademics.com/
 
 ![demo](https://user-images.githubusercontent.com/101005658/170934998-f7af8941-b48b-41d1-980a-474cfd2e55f5.gif "demo hack")
