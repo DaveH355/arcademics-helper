@@ -1,4 +1,4 @@
-# arcademics-cheats (Broken)
+# arcademics-cheats
 Cheat scripts for games on https://www.arcademics.com/
 
 ![demo](https://user-images.githubusercontent.com/101005658/170934998-f7af8941-b48b-41d1-980a-474cfd2e55f5.gif "demo hack")
@@ -18,8 +18,8 @@ These cheats currently only work in the Google Chrome browser. Also note you'll 
 ## Supported games
 These are the current games you can cheat on. Links to copy the script also included
 
-- `Tractor Multiplication` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/tractor-multiplication.js
+- `Tractor Multiplication (Broken)` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/tractor-multiplication.js
 
 - `Grand Prix Multiplication` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/grand-prix.js
 
-- `Jet Ski Addition` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/jet-ski-addition.js
+- `Jet Ski Addition (Broken)` https://github.com/DaveH355/arcademics-cheats/blob/main/scripts/jet-ski-addition.js
