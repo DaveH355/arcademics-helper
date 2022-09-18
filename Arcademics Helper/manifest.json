@@ -1,0 +1,44 @@
+{
+  "name": "Arcademics Helper",
+  "version": "1.0",
+  "description": "Helps out with arcademics gameplay",
+  "permissions": [
+    "debugger",
+    "activeTab",
+    "declarativeContent",
+    "https://www.arcademics.com/*",
+    "http://www.arcademics.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/black_16.png",
+      "32": "images/black_32.png",
+      "48": "images/black.png",
+      "128": "images/black.png"
+    }
+  },
+  "icons": {
+    "16": "images/black_16.png",
+    "32": "images/black_32.png",
+    "48": "images/black.png",
+    "128": "images/black.png"
+  },
+  "manifest_version": 2
+}
