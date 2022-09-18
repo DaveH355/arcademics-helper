@@ -7,9 +7,9 @@ Cheat scripts for games on https://www.arcademics.com/
 This bot works through a Chrome extension
 Note currently only the Grand Prix game is supported
 
-- `Step 1` Download the Arcademics Helper extension from here
+- `Step 1` Download the Arcademics Helper extension from here [download-directory.github.io](https://download-directory.github.io/?url=https://github.com/DaveH355/arcademics-cheats/tree/main/Arcademics%20Helper) Remember to unzip.
 
-- `Step 2` Go to [chrome://extensions](chrome://extensions) and turn on Developer mode. Click the load unpacked button and find where you downloaded the extension
+- `Step 2` Go to [chrome://extensions](chrome://extensions/) and turn on Developer mode. Click the load unpacked button and find where you downloaded the extension
 
 - `Step 3` Open an arcademics game and click on the extension to activate it. 
 
