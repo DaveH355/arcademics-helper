@@ -6,8 +6,8 @@
     "debugger",
     "activeTab",
     "declarativeContent",
-    "https://www.arcademics.com/*",
-    "http://www.arcademics.com/*"
+    "https://*.arcademics.com/*",
+    "http://*.arcademics.com/*"
   ],
   "background": {
     "scripts": [
@@ -18,8 +18,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.arcademics.com/*",
-        "http://www.arcademics.com/*"
+        "https://*.arcademics.com/*",
+        "http://*.arcademics.com/*"
       ],
       "js": [
         "contentScript.js"
