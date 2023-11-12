@@ -1,11 +1,10 @@
 'use strict';
 
-//part 1. activating/deactivating the debugger via the browserAction button.
 const activeTabs = {};
 
 function updateIcon(tabId) {
     const color = activeTabs[tabId] ? 'red' : 'black';
-    chrome.browserAction.setIcon({path: `images/${color}_16.png`});
+    chrome.action.setIcon({tabId, path: `images/${color}_16.png`});
 }
 
 function detachTab(tabId) {
@@ -24,19 +23,17 @@ function attachTab(tabId) {
     });
 }
 
-chrome.browserAction.onClicked.addListener(function callback(data) {
+chrome.action.onClicked.addListener(function callback(tab) {
     console.log("BrowserAction icon clicked. Attaching/detaching the tab.");
-    const tabId = data.id;
+    const tabId = tab.id;
     activeTabs[tabId] ? detachTab(tabId) : attachTab(tabId);
 });
 
-chrome.tabs.onActivated.addListener(function callback(data) {
-    // console.log("A tab activated. Updating icon.");
-    updateIcon(data.tabId);
+chrome.tabs.onActivated.addListener(function callback(activeInfo) {
+    updateIcon(activeInfo.tabId);
 })
 
 chrome.runtime.onMessage.addListener(function handleMessage(request, sender, sendResponse) {
-    //filtering out inactive tabs
     var tabId = sender.tab.id;
     if (!activeTabs[tabId])
         return;
@@ -44,9 +41,7 @@ chrome.runtime.onMessage.addListener(function handleMessage(request, sender, sen
     dispatchNativeEvent(request, tabId);
 });
 
-//part 2. turning messages into native events for active tabs.
 function dispatchNativeEvent(event, tabId) {
-    //convert the command into an approved native event here.
     let cmd;
     if (event.type.startsWith("mouse"))
         cmd = "Input.dispatchMouseEvent";

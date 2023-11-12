@@ -168,80 +168,59 @@ window.addEventListener("beforeinput-is-trusted", manInTheMiddle);
 
 
 //Arcademics Script Begin
-var ANS_1 = null
-var ANS_2 = null
-var ANS_3 = null
+let answers = {
+    ANS_1: null,
+    ANS_2: null,
+    ANS_3: null,
+    ANS_4: null
+};
 
-var ANS_4 = null
+let question = null;
+let num1 = null;
+let num2 = null;
+let answer = null;
 
-var QUESTION = null
 
-var arr = [];
+const getContent = (childNum, textNum) => {
+    return parseInt(document.querySelector(`#gameContainer > iframe`).contentDocument.querySelector(`#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
+}
 
-var num1 = null
+const dispatchEvent = (key, code) => {
+    window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
+        key: key,
+        code: code,
+    }));
+}
 
-var num2 = null
-
-var answer = null
-
-//find out what the questions and answers are
+// Find out what the questions and answers are
 function findQA() {
+    answers.ANS_4 = getContent(5, 3);
+    answers.ANS_3 = getContent(4, 3);
+    answers.ANS_2 = getContent(3, 3);
+    answers.ANS_1 = getContent(2, 3);
 
-    ANS_4 = parseInt(document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(5) > text:nth-child(3)").textContent)
-    ANS_3 = parseInt(document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(4) > text:nth-child(3)").textContent)
-    ANS_2 = parseInt(document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(3) > text:nth-child(3)").textContent)
-    ANS_1 = parseInt(document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(2) > text:nth-child(3)").textContent)
-
-    arr = (document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent).split('×')
-
-    num1 = parseInt(arr[0])
-    num2 = parseInt(arr[arr.length - 1])
+    let arr = document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent.split('×');
+    num1 = parseInt(arr[0]);
+    num2 = parseInt(arr[arr.length - 1]);
 
     answer = num1 * num2;
 
-    var elem
-    if (answer === ANS_4) {
-        window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
-            key: "4",
-            code: "Digit4",
-        }));
-
+    for (let key in answers) {
+        if (answer === answers[key]) {
+            dispatchEvent(key.slice(-1), `Digit${key.slice(-1)}`);
+        }
     }
-    else if (answer === ANS_3) {
-        window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
-            key: "3",
-            code: "Digit3",
-        }));
 
-    }
-    else if (answer === ANS_2) {
-        window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
-            key: "2",
-            code: "Digit2",
-        }));
-
-    }
-    else if (answer === ANS_1) {
-        window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
-            key: "1",
-            code: "Digit1",
-        }));
-
-    }
-    ANS_1 = null
-    ANS_2 = null
-    ANS_3 = null
-    ANS_4 = null
-    arr = []
-    num1 = null
-    num2 = null
-    answer = null
-    elem = null
+    answers.ANS_1 = null;
+    answers.ANS_2 = null;
+    answers.ANS_3 = null;
+    answers.ANS_4 = null;
+    num1 = null;
+    num2 = null;
+    answer = null;
 }
 
-
-
-//listen for user input
+// Listen for user input
 document.querySelector("#gameContainer > iframe").contentDocument.body.addEventListener("keypress", function onEvent(event) {
     if (event.key === "a") {
         findQA();
