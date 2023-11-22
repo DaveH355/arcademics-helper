@@ -16,6 +16,11 @@ This bot works through a Chrome extension
 
 ## Supported games
 - `Grand Prix Multiplication` 
+- `Canoe Puppies`
+- `Tractor Multiplication`
+- `Drag Race Division`
+- `Ducky Race`
+
 
 ## Troubleshooting
 Here are some possible solutions to try if the bot is not working

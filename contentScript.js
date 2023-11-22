@@ -180,10 +180,26 @@ let num1 = null;
 let num2 = null;
 let answer = null;
 
+let IFRAME = document.querySelector("#gameContainer > iframe").contentDocument;
 
-const getContent = (childNum, textNum) => {
-    return parseInt(document.querySelector(`#gameContainer > iframe`).contentDocument.querySelector(`#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
+
+const grandPrix = (childNum, textNum) => {
+    return parseInt(IFRAME.querySelector(`#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
 }
+const canoePuppies = (childNum, textNum) => {
+    return parseInt(IFRAME.querySelector(`#main > g > g > g:nth-child(2) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
+}
+const tractor = (childNum, textNum) => {
+    return parseInt(IFRAME.querySelector(`#main > g > g > g:nth-child(12) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
+}
+//TODO: code duplication
+const dragDiv = (childNum, textNum) => {
+    return parseInt(IFRAME.querySelector(`#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
+}
+const duckyRace = (childNum, textNum) => {
+    return parseInt(IFRAME.querySelector(`#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`).textContent);
+}
+
 
 const dispatchEvent = (key, code) => {
     window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
@@ -194,16 +210,69 @@ const dispatchEvent = (key, code) => {
 
 // Find out what the questions and answers are
 function findQA() {
-    answers.ANS_4 = getContent(5, 3);
-    answers.ANS_3 = getContent(4, 3);
-    answers.ANS_2 = getContent(3, 3);
-    answers.ANS_1 = getContent(2, 3);
+    let gamemode = document.querySelector("body > div.wrapper > div.content > div.contentSectionGameplay > div > div > div:nth-child(1) > h1").textContent;
+    if (gamemode ===
+        'Canoe Puppies') {
+        answers.ANS_4 = canoePuppies(5, 3)
+        answers.ANS_3 = canoePuppies(4, 3)
+        answers.ANS_2 = canoePuppies(3, 3)
+        answers.ANS_1 = canoePuppies(2, 3)
 
-    let arr = document.querySelector("#gameContainer > iframe").contentDocument.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent.split('×');
-    num1 = parseInt(arr[0]);
-    num2 = parseInt(arr[arr.length - 1]);
+        num1 = parseInt(IFRAME.querySelector("#main > g > g > g:nth-child(2) > g:nth-child(4) > g:nth-child(1) > g > text:nth-child(1)").textContent)
+        num2 = parseInt(IFRAME.querySelector("#main > g > g > g:nth-child(2) > g:nth-child(4) > g:nth-child(1) > g > text:nth-child(2)").textContent)
 
-    answer = num1 * num2;
+        answer = num1 + num2;
+    }
+    if (gamemode === 'Grand Prix Multiplication') {
+        answers.ANS_4 = grandPrix(5, 3);
+        answers.ANS_3 = grandPrix(4, 3);
+        answers.ANS_2 = grandPrix(3, 3);
+        answers.ANS_1 = grandPrix(2, 3);
+
+        let arr = IFRAME.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent.split('×');
+        num1 = parseInt(arr[0]);
+        num2 = parseInt(arr[arr.length - 1]);
+
+        answer = num1 * num2;
+    }
+    if (gamemode === 'Tractor Multiplication') {
+        answers.ANS_4 = tractor(5, 3)
+        answers.ANS_3 = tractor(4, 3)
+        answers.ANS_2 = tractor(3, 3)
+        answers.ANS_1 = tractor(2, 3)
+
+        let arr = IFRAME.querySelector("#main > g > g > g:nth-child(12) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent.split('×');
+        num1 = parseInt(arr[0]);
+        num2 = parseInt(arr[arr.length - 1]);
+
+        answer = num1 * num2;
+    }
+    //TODO: code duplication
+    if (gamemode === 'Drag Race Division') {
+        answers.ANS_4 = dragDiv(5, 3)
+        answers.ANS_3 = dragDiv(4, 3)
+        answers.ANS_2 = dragDiv(3, 3)
+        answers.ANS_1 = dragDiv(2, 3)
+
+        let arr = IFRAME.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent.split('÷');
+        num1 = parseInt(arr[0]);
+        num2 = parseInt(arr[arr.length - 1]);
+
+        answer = num1 / num2;
+    }
+    //TODO: code duplication
+    if (gamemode === 'Ducky Race') {
+        answers.ANS_4 = duckyRace(5, 3)
+        answers.ANS_3 = duckyRace(4, 3)
+        answers.ANS_2 = duckyRace(3, 3)
+        answers.ANS_1 = duckyRace(2, 3)
+
+        let arr = IFRAME.querySelector("#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)").textContent.split('-');
+        num1 = parseInt(arr[0]);
+        num2 = parseInt(arr[arr.length - 1]);
+
+        answer = num1 - num2;
+    }
 
     for (let key in answers) {
         if (answer === answers[key]) {
