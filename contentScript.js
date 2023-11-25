@@ -203,6 +203,8 @@ const duckyRace = (childNum, textNum) => {
 
 const dispatchEvent = (key, code) => {
     window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
+        bubbles: true, 
+        cancelable: true,
         key: key,
         code: code,
     }));
@@ -290,7 +292,7 @@ function findQA() {
 }
 
 // Listen for user input
-document.querySelector("#gameContainer > iframe").contentDocument.body.addEventListener("keypress", function onEvent(event) {
+IFRAME.body.addEventListener("keypress", function onEvent(event) {
     if (event.key === "a") {
         findQA();
     }
