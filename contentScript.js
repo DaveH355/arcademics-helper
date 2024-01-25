@@ -212,7 +212,7 @@ const dispatchEvent = (key, code) => {
 
 // Find out what the questions and answers are
 function findQA() {
-    let gamemode = document.querySelector("body > div.wrapper > div.content > div.contentSectionGameplay > div > div > div:nth-child(1) > h1").textContent;
+    let gamemode = document.querySelector("body > div.wrapper > div.content > div.contentSectionGameplay > div > div:nth-child(1) > h1").textContent;
     if (gamemode ===
         'Canoe Puppies') {
         answers.ANS_4 = canoePuppies(5, 3)
