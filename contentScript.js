@@ -203,7 +203,7 @@ const duckyRace = (childNum, textNum) => {
 
 const dispatchEvent = (key, code) => {
     window.dispatchEvent(new KeyboardEvent("keydown-is-trusted", {
-        bubbles: true, 
+        bubbles: true,
         cancelable: true,
         key: key,
         code: code,
@@ -212,9 +212,13 @@ const dispatchEvent = (key, code) => {
 
 // Find out what the questions and answers are
 function findQA() {
-    let gamemode = document.querySelector("body > div.wrapper > div.content > div.contentSectionGameplay > div > div:nth-child(1) > h1").textContent;
+    let url = window.location.href;
+
+    const matches = url.match(/games\/([^\/]+)/);
+    const gamemode = matches[1];
+
     if (gamemode ===
-        'Canoe Puppies') {
+        'canoe-puppies') {
         answers.ANS_4 = canoePuppies(5, 3)
         answers.ANS_3 = canoePuppies(4, 3)
         answers.ANS_2 = canoePuppies(3, 3)
@@ -225,7 +229,7 @@ function findQA() {
 
         answer = num1 + num2;
     }
-    if (gamemode === 'Grand Prix Multiplication') {
+    if (gamemode === 'grand-prix') {
         answers.ANS_4 = grandPrix(5, 3);
         answers.ANS_3 = grandPrix(4, 3);
         answers.ANS_2 = grandPrix(3, 3);
@@ -237,7 +241,7 @@ function findQA() {
 
         answer = num1 * num2;
     }
-    if (gamemode === 'Tractor Multiplication') {
+    if (gamemode === "tractor-multiplication") {
         answers.ANS_4 = tractor(5, 3)
         answers.ANS_3 = tractor(4, 3)
         answers.ANS_2 = tractor(3, 3)
@@ -250,7 +254,7 @@ function findQA() {
         answer = num1 * num2;
     }
     //TODO: code duplication
-    if (gamemode === 'Drag Race Division') {
+    if (gamemode === 'drag-race') {
         answers.ANS_4 = dragDiv(5, 3)
         answers.ANS_3 = dragDiv(4, 3)
         answers.ANS_2 = dragDiv(3, 3)
@@ -263,7 +267,7 @@ function findQA() {
         answer = num1 / num2;
     }
     //TODO: code duplication
-    if (gamemode === 'Ducky Race') {
+    if (gamemode === 'ducky-race') {
         answers.ANS_4 = duckyRace(5, 3)
         answers.ANS_3 = duckyRace(4, 3)
         answers.ANS_2 = duckyRace(3, 3)
