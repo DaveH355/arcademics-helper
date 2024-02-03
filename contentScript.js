@@ -164,6 +164,11 @@ let num2 = null;
 let answer = null;
 
 let IFRAME = document.querySelector("#gameContainer > iframe").contentDocument;
+var scriptSrc = IFRAME.head.querySelector("script").src;
+
+var regex = /([^/]+)(?=\.js$)/;
+var gamemode = scriptSrc.match(regex)[0].trim();
+console.log("Detected gamemode:", gamemode);
 
 const grandPrix = (childNum, textNum) => {
   return parseInt(
@@ -215,10 +220,6 @@ const dispatchEvent = (key, code) => {
 
 // Find out what the questions and answers are
 function findQA() {
-  let url = window.location.href;
-
-  const matches = url.match(/games\/([^\/]+)/);
-  const gamemode = matches[1];
 
   if (gamemode === "canoe-puppies") {
     answers.ANS_4 = canoePuppies(5, 3);
