@@ -151,61 +151,12 @@ window.addEventListener("char-is-trusted", manInTheMiddle);
 window.addEventListener("beforeinput-is-trusted", manInTheMiddle);
 
 //Arcademics Script Begin
-let answers = {
-  ANS_1: null,
-  ANS_2: null,
-  ANS_3: null,
-  ANS_4: null,
-};
-
-let question = null;
-let num1 = null;
-let num2 = null;
-let answer = null;
-
 let IFRAME = document.querySelector("#gameContainer > iframe").contentDocument;
 var scriptSrc = IFRAME.head.querySelector("script").src;
 
 var regex = /([^/]+)(?=\.js$)/;
 var gamemode = scriptSrc.match(regex)[0].trim();
 console.log("Detected gamemode:", gamemode);
-
-const grandPrix = (childNum, textNum) => {
-  return parseInt(
-    IFRAME.querySelector(
-      `#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`,
-    ).textContent,
-  );
-};
-const canoePuppies = (childNum, textNum) => {
-  return parseInt(
-    IFRAME.querySelector(
-      `#main > g > g > g:nth-child(2) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`,
-    ).textContent,
-  );
-};
-const tractor = (childNum, textNum) => {
-  return parseInt(
-    IFRAME.querySelector(
-      `#main > g > g > g:nth-child(12) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`,
-    ).textContent,
-  );
-};
-//TODO: code duplication
-const dragDiv = (childNum, textNum) => {
-  return parseInt(
-    IFRAME.querySelector(
-      `#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`,
-    ).textContent,
-  );
-};
-const duckyRace = (childNum, textNum) => {
-  return parseInt(
-    IFRAME.querySelector(
-      `#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(${childNum}) > text:nth-child(${textNum})`,
-    ).textContent,
-  );
-};
 
 const dispatchEvent = (key, code) => {
   window.dispatchEvent(
@@ -218,100 +169,83 @@ const dispatchEvent = (key, code) => {
   );
 };
 
+function parseString(str) {
+  const regex = /^(\d{2})(\d{1,2})\D.*/;
+  const match = str.match(regex);
+  if (match) {
+    const num1 = match[1]; // first 2 digits
+    const num2 = match[2]; // last 1 or 2 digits
+    return [parseInt(num1), parseInt(num2)];
+  } else {
+    return null;
+  }
+}
+
 // Find out what the questions and answers are
 function findQA() {
+  let hud = IFRAME.querySelector('g[transform*="translate(104, 6)"]');
+  let question = hud.children[0].lastChild.textContent;
 
+  // child of hud is answer, last child of that is <text>
+  const [, var1, var2, var3, var4] = Array.from(hud.children).map((child) =>
+    parseInt(child.lastChild.textContent),
+  );
+  // console.log(question);
+  // console.log(var1);
+  // console.log(var2);
+  // console.log(var3);
+  // console.log(var4);
+  // console.log("breakk");
+
+  let answer = -1;
   if (gamemode === "canoe-puppies") {
-    answers.ANS_4 = canoePuppies(5, 3);
-    answers.ANS_3 = canoePuppies(4, 3);
-    answers.ANS_2 = canoePuppies(3, 3);
-    answers.ANS_1 = canoePuppies(2, 3);
-
-    num1 = parseInt(
-      IFRAME.querySelector(
-        "#main > g > g > g:nth-child(2) > g:nth-child(4) > g:nth-child(1) > g > text:nth-child(1)",
-      ).textContent,
-    );
-    num2 = parseInt(
-      IFRAME.querySelector(
-        "#main > g > g > g:nth-child(2) > g:nth-child(4) > g:nth-child(1) > g > text:nth-child(2)",
-      ).textContent,
-    );
-
+    const [num1, num2] = parseString(question);
+    // console.log(num1);
+    // console.log(num2);
     answer = num1 + num2;
   }
   if (gamemode === "grand-prix") {
-    answers.ANS_4 = grandPrix(5, 3);
-    answers.ANS_3 = grandPrix(4, 3);
-    answers.ANS_2 = grandPrix(3, 3);
-    answers.ANS_1 = grandPrix(2, 3);
-
-    let arr = IFRAME.querySelector(
-      "#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)",
-    ).textContent.split("×");
-    num1 = parseInt(arr[0]);
-    num2 = parseInt(arr[arr.length - 1]);
+    let arr = question.split("×");
+    let num1 = parseInt(arr[0]);
+    let num2 = parseInt(arr[arr.length - 1]);
 
     answer = num1 * num2;
   }
   if (gamemode === "tractor-multiplication") {
-    answers.ANS_4 = tractor(5, 3);
-    answers.ANS_3 = tractor(4, 3);
-    answers.ANS_2 = tractor(3, 3);
-    answers.ANS_1 = tractor(2, 3);
-
-    let arr = IFRAME.querySelector(
-      "#main > g > g > g:nth-child(12) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)",
-    ).textContent.split("×");
-    num1 = parseInt(arr[0]);
-    num2 = parseInt(arr[arr.length - 1]);
+    let arr = question.split("×");
+    let num1 = parseInt(arr[0]);
+    let num2 = parseInt(arr[arr.length - 1]);
 
     answer = num1 * num2;
   }
-  //TODO: code duplication
-  if (gamemode === "drag-race") {
-    answers.ANS_4 = dragDiv(5, 3);
-    answers.ANS_3 = dragDiv(4, 3);
-    answers.ANS_2 = dragDiv(3, 3);
-    answers.ANS_1 = dragDiv(2, 3);
 
-    let arr = IFRAME.querySelector(
-      "#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)",
-    ).textContent.split("÷");
-    num1 = parseInt(arr[0]);
-    num2 = parseInt(arr[arr.length - 1]);
+  if (gamemode === "drag-race") {
+    let arr = question.split("÷");
+    let num1 = parseInt(arr[0]);
+    let num2 = parseInt(arr[arr.length - 1]);
 
     answer = num1 / num2;
   }
-  //TODO: code duplication
-  if (gamemode === "ducky-race") {
-    answers.ANS_4 = duckyRace(5, 3);
-    answers.ANS_3 = duckyRace(4, 3);
-    answers.ANS_2 = duckyRace(3, 3);
-    answers.ANS_1 = duckyRace(2, 3);
 
-    let arr = IFRAME.querySelector(
-      "#main > g > g > g:nth-child(3) > g:nth-child(4) > g:nth-child(1) > text:nth-child(4)",
-    ).textContent.split("-");
-    num1 = parseInt(arr[0]);
-    num2 = parseInt(arr[arr.length - 1]);
+  if (gamemode === "ducky-race") {
+    let arr = question.split("-");
+    let num1 = parseInt(arr[0]);
+    let num2 = parseInt(arr[arr.length - 1]);
 
     answer = num1 - num2;
   }
 
-  for (let key in answers) {
-    if (answer === answers[key]) {
-      dispatchEvent(key.slice(-1), `Digit${key.slice(-1)}`);
-    }
+  if (answer == var1) {
+    dispatchEvent(1, "Digit1");
+  } else if (answer == var2) {
+    dispatchEvent(2, "Digit2");
+  } else if (answer == var3) {
+    dispatchEvent(3, "Digit3");
+  } else if (answer == var4) {
+    dispatchEvent(4, "Digit4");
+  } else {
+    console.log("Something went wrong\n");
   }
-
-  answers.ANS_1 = null;
-  answers.ANS_2 = null;
-  answers.ANS_3 = null;
-  answers.ANS_4 = null;
-  num1 = null;
-  num2 = null;
-  answer = null;
 }
 
 // Listen for user input
