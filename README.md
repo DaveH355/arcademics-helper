@@ -20,6 +20,7 @@ This bot works through a Chrome extension
 
 - `Grand Prix Multiplication`
 - `Canoe Puppies`
+- `Canoe Penguins`
 - `Tractor Multiplication`
 - `Drag Race Division`
 - `Ducky Race`

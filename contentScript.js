@@ -204,6 +204,10 @@ function findQA() {
     // console.log(num2);
     answer = num1 + num2;
   }
+  if (gamemode === "canoe-penguins") {
+    const [num1, num2] = parseString(question);
+    answer = num1 * num2;
+  }
   if (gamemode === "grand-prix") {
     let arr = question.split("×");
     let num1 = parseInt(arr[0]);
