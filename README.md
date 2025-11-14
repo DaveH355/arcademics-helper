@@ -29,5 +29,5 @@ This bot works through a Chrome extension
 
 Here are some possible solutions to try if the bot is not working
 
-- Make sure not to cancel or close any banners named `"Arcademics Helper" started debugging this browser` as this will block the bot from clicking or typing
+- Make sure not to cancel or close any banners named `"Arcademics Helper" started debugging this browser` as this will prevent the bot from clicking or typing
 - Running with devtools open may help. Press _F12_ open devtools
